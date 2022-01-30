@@ -55,9 +55,9 @@ void drawWindow(int x, int y, int width, int height, char* name, unsigned char V
 {
     drawRect(x, y, width, height, 0x17);
     drawRect(x + 1, y, width - 2, height - 1, VGA_COLOR);
-    drawRect(x, 7, width, 9, 0x37);
+    drawRect(x, y-3, width, 9, 0x37);
     drawString(name, x + 2, y - 1);
-    drawImage(close, width + 3, y - 1);
+    drawImage(close, x + width - 7, y - 1);
 }
 
 void drawLetter(char *letter, int startx, int starty)
