@@ -2,12 +2,18 @@
 #include "../kernel/util.h"
 #include "icon.h"
 #include "ascii.h"
+#include <stdbool.h>
+
+bool MouseDrawn;
 
 int width       = 320;     //pixels horizontally                   (vesa = 1024 )  (vga = 320)
 int height      = 200;      //pixels vertically                     (vesa = 786  )  (vga = 200)
 int pitch       = 5120;    //width*pixelwidth                      (vesa = 16384)  (vga = 5120)
 int depth       = 8;       //how many bits of color                (vesa = 16)     (vga = 8)
 int pixelwidth  = 8;       //how many bytes to go one pixel over   (vesa = 16)     (vga = 8)
+
+uint32_t MouseCursorBuffer[16 * 16];
+uint32_t MouseCursorBufferAfter[16 * 16];
 
 void putPixel(int pos_x, int pos_y, unsigned char VGA_COLOR)
 {
@@ -17,6 +23,12 @@ void putPixel(int pos_x, int pos_y, unsigned char VGA_COLOR)
 
     unsigned char* location = (unsigned char*)0xA0000 + WIDTH * pos_y + pos_x;
     *location = VGA_COLOR;
+}
+
+int getPixel(int pos_x, int pos_y)
+{
+    unsigned char* location = (unsigned char*)0xA0000 + WIDTH * pos_y + pos_x;
+    return location;
 }
 
 void drawRect(int startx, int starty, int width, int height, unsigned char VGA_COLOR)
@@ -104,6 +116,10 @@ void drawImage(char *icon, int posx, int posy)
             x = posx;
             y++;
         }
+        //if(icon[i] == 0b10)
+        //{
+        //    x++;
+        //}
         else
         {
             putPixel(x, y, icon[i]);
@@ -112,10 +128,17 @@ void drawImage(char *icon, int posx, int posy)
     }
 }
 
+
+void drawCursor(uint8_t pointer, struct Point pos)
+{
+    PaintDesktop(0x09);    
+    drawRect(pos.X, pos.Y, 3, 3, 0x0F);
+}
+
 void drawString(char* str, int startx, int starty)
 {
     int x = startx; 
-    for (int i = 0; i != '\n'; i++)
+    for (int i = 0; i != 20; i++)
     {   
         if (str[i] == 'A' || str[i] == 'a')
         {

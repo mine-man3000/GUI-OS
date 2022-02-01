@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TYPES_H
+#define TYPES_H
 
 typedef char                     int8_t;
 typedef unsigned char           uint8_t;
@@ -8,3 +9,10 @@ typedef int                     int32_t;
 typedef unsigned int           uint32_t;
 typedef long long int           int64_t;
 typedef unsigned long long int uint64_t;
+
+static struct Point{
+    long X;
+    long Y;
+} Point;
+
+#endif
