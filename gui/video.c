@@ -8,7 +8,7 @@ bool MouseDrawn;
 
 int width       = 320;     //pixels horizontally                   (vesa = 1024 )  (vga = 320)
 int height      = 200;      //pixels vertically                     (vesa = 786  )  (vga = 200)
-int pitch       = 5120;    //width*pixelwidth                      (vesa = 16384)  (vga = 5120)
+int pitch       = 2560;    //width*pixelwidth                      (vesa = 16384)  (vga = 5120)
 int depth       = 8;       //how many bits of color                (vesa = 16)     (vga = 8)
 int pixelwidth  = 8;       //how many bytes to go one pixel over   (vesa = 16)     (vga = 8)
 
@@ -132,7 +132,8 @@ void drawImage(char *icon, int posx, int posy)
 void drawCursor(uint8_t pointer, struct Point pos)
 {
     PaintDesktop(0x09);    
-    drawRect(pos.X, pos.Y, 3, 3, 0x0F);
+    drawRect((pos.X-1) / 2 + 160, (pos.Y-1) / 2 + 100, 5, 5, 0x00);
+    drawRect(pos.X / 2 + 160, pos.Y / 2 + 100, 3, 3, 0x0F);
 }
 
 void drawString(char* str, int startx, int starty)
