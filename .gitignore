@@ -6,3 +6,4 @@ drivers/*.o
 gui/*.o
 kernel/*.o
 libc/*.o
+.vscode
