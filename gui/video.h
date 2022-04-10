@@ -5,7 +5,7 @@
 #define WIDTH   320
 #define HEIGHT  200
 
-void drawCursor(uint8_t pointer, struct Point pos);
+void drawCursor(long X, long Y);
 void putPixel(int pos_x, int pos_y, unsigned char VGA_COLOR);
 void drawRect(int startx, int starty, int width, int height, unsigned char VGA_COLOR);
 void drawLine(int startx, int starty, int width, unsigned char VGA_COLOR);

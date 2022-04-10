@@ -1,24 +1,5 @@
 #include "mouse.h"
 
-uint8_t MousePointer[] = {
-    0b11111111, 0b11100000, 
-    0b11111111, 0b10000000, 
-    0b11111110, 0b00000000, 
-    0b11111100, 0b00000000, 
-    0b11111000, 0b00000000, 
-    0b11110000, 0b00000000, 
-    0b11100000, 0b00000000, 
-    0b11000000, 0b00000000, 
-    0b11000000, 0b00000000, 
-    0b10000000, 0b00000000, 
-    0b10000000, 0b00000000, 
-    0b00000000, 0b00000000, 
-    0b00000000, 0b00000000, 
-    0b00000000, 0b00000000, 
-    0b00000000, 0b00000000, 
-    0b00000000, 0b00000000, 
-};
-
 void MouseWait(){
     uint64_t timeout = 100000;
     while (timeout--){
@@ -103,6 +84,7 @@ void ProcessMousePacket(){
             yOverflow = true;
         }else yOverflow = false;
 
+        
         if (!xNegative){
             MousePosition.X += MousePacket[1];
             if (xOverflow){
@@ -137,8 +119,8 @@ void ProcessMousePacket(){
         if (MousePosition.Y < 0) MousePosition.Y = 0;
         if (MousePosition.Y > 199) MousePosition.Y = 199;
         
-
-        drawCursor(MousePointer, MousePosition);
+        
+        drawCursor(MousePosition.X, MousePosition.Y);
 
         if (MousePacket[0] & PS2Leftbutton){
 
@@ -173,4 +155,6 @@ void InitPS2Mouse(){
 
     MouseWrite(0xF4);
     MouseRead();
+
+    MouseWrite(0xF3);
 }

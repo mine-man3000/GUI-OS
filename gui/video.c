@@ -1,5 +1,5 @@
 #include "video.h"
-#include "../kernel/util.h"
+#include "../libc/mem.h"
 #include "icon.h"
 #include "ascii.h"
 #include <stdbool.h>
@@ -17,15 +17,11 @@ uint32_t MouseCursorBufferAfter[16 * 16];
 
 void putPixel(int pos_x, int pos_y, unsigned char VGA_COLOR)
 {
-
-    //int Offset = (pos_y * pitch) + (pos_x << 1);
-    //((uint16_t*)VGA_MEM)[Offset] = (uint16_t)VGA_COLOR;
-
     unsigned char* location = (unsigned char*)0xA0000 + WIDTH * pos_y + pos_x;
     *location = VGA_COLOR;
 }
 
-int getPixel(int pos_x, int pos_y)
+unsigned char getPixel(int pos_x, int pos_y)
 {
     unsigned char* location = (unsigned char*)0xA0000 + WIDTH * pos_y + pos_x;
     return location;
@@ -60,7 +56,7 @@ void PaintDesktop(int VGA_COLOR)
     //fill the background of the desktop
     drawRect(0, 0 , WIDTH, HEIGHT, VGA_COLOR);
     drawRect(0, 180, 320, 20, 0x07);
-    drawImage(start, 2, 182);
+   // drawImage(start, 2, 182);
 }
 
 void drawWindow(int x, int y, int width, int height, char* name, unsigned char VGA_COLOR)
@@ -69,39 +65,30 @@ void drawWindow(int x, int y, int width, int height, char* name, unsigned char V
     drawRect(x + 1, y, width - 2, height - 1, VGA_COLOR);
     drawRect(x, y-3, width, 9, 0x37);
     drawString(name, x + 2, y - 1);
-    drawImage(close, x + width - 7, y - 1);
+    //drawImage(close, x + width - 7, y - 1);
 }
 
 void drawLetter(char *letter, int startx, int starty)
 {
     int x = startx;
     int y = starty;
-    ////printf('STARTX = %d\n', startx);
-    ////printf('STARTY = %d\n', starty);
     for (int i = 0; i < 29; i++)
     {
         if (letter[i] == 2)
         {
-            ////printf('%s\n', letter[i]);
             x = startx;
             y++;
-            //printf('\n');
         }
         if (letter[i] == 1)
         {
             putPixel(x, y, 0x00);
             x++;
-            //printf('%d', letter[i]);
         }
         if (letter[i] == 0)
         {
             x++;
-            //printf(' ');
         }
-        ////printf('X = %d\n', x);
-        ////printf('Y = %d\n', y);
     }
-    //printf('\n');
 }
 
 void drawImage(char *icon, int posx, int posy)
@@ -110,16 +97,11 @@ void drawImage(char *icon, int posx, int posy)
     int y = posy;
     for (int i = 0; icon[i] != 3; i++)
     {
-        //printf('%d ', y);
         if(icon[i] == 2)
         {
             x = posx;
             y++;
         }
-        //if(icon[i] == 0b10)
-        //{
-        //    x++;
-        //}
         else
         {
             putPixel(x, y, icon[i]);
@@ -129,17 +111,16 @@ void drawImage(char *icon, int posx, int posy)
 }
 
 
-void drawCursor(uint8_t pointer, struct Point pos)
+void drawCursor(long X, long Y)
 {
-    PaintDesktop(0x09);    
-    drawRect((pos.X-1) / 2 + 160, (pos.Y-1) / 2 + 100, 5, 5, 0x00);
-    drawRect(pos.X / 2 + 160, pos.Y / 2 + 100, 3, 3, 0x0F);
+    PaintDesktop(0x09);
+    drawRect(X, Y, 3, 3, 0x00);
 }
 
 void drawString(char* str, int startx, int starty)
 {
     int x = startx; 
-    for (int i = 0; i != 20; i++)
+    for (int i = 0; str[i] != '\0'; i++)
     {   
         if (str[i] == 'A' || str[i] == 'a')
         {

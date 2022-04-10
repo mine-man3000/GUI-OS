@@ -1,14 +1,23 @@
+#include "../cpu/isr.h"
+#include "../drivers/screen.h"
+#include "kernel.h"
+#include "../libc/string.h"
+#include "../libc/mem.h"
 #include "../gui/video.h"
-#include "util.h"
-#include "../drivers/mouse.h" 
+#include "../drivers/mouse.h"
 
-void main() 
-{
+void kernel_main() {
+//    isr_install();
+//    irq_install();
+
     //background
     PaintDesktop(0x09);
 
-    //has to be padded to 10 characters for whatver reason even
-    //drawWindow(10, 10, 200, 9, "HELLO WORLD         ", 0x0F);
+    //
+    drawWindow(10, 10, 200, 9, "HELLO WORLD", 0x0F);
+
+    drawWindow(15, 15, 200, 9, "HELLO WORLD", 0x0F);
+
 
 
     InitPS2Mouse();
@@ -21,9 +30,35 @@ void main()
         uint8_t mouseDataOld = port_word_in(0x60);
         if(mouseData != mouseDataOld)
         {
+            drawWindow(10, 10, 200, 9, "HELLO WORLD", 0x0F);
             //PaintDesktop(0x09);
             HandlePS2Mouse(mouseData);
-
+            
         }
     }
+
+}
+
+void user_input(char *input) {
+    return;
+    //if (strcmp(input, "END") == 0) {
+    //    kprint("Stopping the CPU. Bye!\n");
+    //    asm volatile("hlt");
+    //} else if (strcmp(input, "PAGE") == 0) {
+    //    /* Lesson 22: Code to test kmalloc, the rest is unchanged */
+    //    uint32_t phys_addr;
+    //    uint32_t page = kmalloc(1000, 1, &phys_addr);
+    //    char page_str[16] = "";
+    //    hex_to_ascii(page, page_str);
+    //    char phys_str[16] = "";
+    //    hex_to_ascii(phys_addr, phys_str);
+    //    kprint("Page: ");
+    //    kprint(page_str);
+    //    kprint(", physical address: ");
+    //    kprint(phys_str);
+    //    kprint("\n");
+    //}
+    //kprint("You said: ");
+    //kprint(input);
+    //kprint("\n> ");
 }

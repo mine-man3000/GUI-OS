@@ -1,4 +1,4 @@
-#include "ports.h"
+#include "../cpu/ports.h"
 #include "types.h"
 #include <stdbool.h>
 #include "../gui/video.h"
