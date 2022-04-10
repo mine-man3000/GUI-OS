@@ -124,7 +124,7 @@ void drawCursor(long X, long Y)
     drawRect(X, Y, 3, 3, 0x00);
 }
 
-void drawString(char* str)
+void drawString(char* str, int startx, int starty)
 {
     //Better?
 }
