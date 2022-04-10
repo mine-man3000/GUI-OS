@@ -14,11 +14,12 @@ void kernel_main() {
     PaintDesktop(0x09);
 
     //
-    drawWindow(10, 10, 200, 9, "HELLO WORLD", 0x0F);
+    //drawWindow(10, 10, 10, 10, "HELLO WORLD", 0x0F);
 
-    drawWindow(15, 15, 200, 9, "HELLO WORLD", 0x0F);
+    //drawWindow(15, 15, 200, 9, "HELLO WORLD", 0x0F);
 
 
+    drawRect(10, 10, 10, 10, 0xAA);
 
     InitPS2Mouse();
 
@@ -30,8 +31,9 @@ void kernel_main() {
         uint8_t mouseDataOld = port_word_in(0x60);
         if(mouseData != mouseDataOld)
         {
-            drawWindow(10, 10, 200, 9, "HELLO WORLD", 0x0F);
+            //drawWindow(10, 10, 200, 9, "HELLO WORLD", 0x0F);
             //PaintDesktop(0x09);
+            drawRect(100, 100, 10, 10, 0xAA);
             HandlePS2Mouse(mouseData);
             
         }
