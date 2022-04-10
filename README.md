@@ -9,6 +9,7 @@ What I want to do:
 - [ ] Read From FAT32
 - [ ] Terminal
 - [ ] Port *Something*
+- [ ] Fix Icon and Text rendering
 
 What I need to do:
 - [X] Load an IDT so that exceptions and interrupts can be handled.
