@@ -1,4 +1,4 @@
-todo: 
+What I want to do: 
 - [X] Booting 
 - [X] Basic GUI 
 - [X] Mouse Detection 
@@ -10,8 +10,9 @@ todo:
 - [ ] Terminal
 - [ ] Port *Something*
 
+What I need to do:
 - [X] Load an IDT so that exceptions and interrupts can be handled.
-- [X] Write a physical memory allocator, a good starting point is a bitmap allocator.
+- [] Write a physical memory allocator, a good starting point is a bitmap allocator.
 - [ ] Write a virtual memory manager that can map, remap and unmap pages.
 - [ ] Begin parsing ACPI tables, the most important one is the MADT since it contains information about the APIC.
 - [ ] Start up the other CPUs. stivale2 provides a facility to make this less painful.
