@@ -12,13 +12,17 @@ int pitch       = 2560;    //width*pixelwidth                      (vesa = 16384
 int depth       = 8;       //how many bits of color                (vesa = 16)     (vga = 8)
 int pixelwidth  = 8;       //how many bytes to go one pixel over   (vesa = 16)     (vga = 8)
 
+uint8_t g_BackBuffer[320*200];
+
 uint32_t MouseCursorBuffer[16 * 16];
 uint32_t MouseCursorBufferAfter[16 * 16];
 
 void putPixel(int pos_x, int pos_y, unsigned char VGA_COLOR)
 {
-    unsigned char* location = (unsigned char*)0xA0000 + WIDTH * pos_y + pos_x;
-    *location = VGA_COLOR;
+    g_BackBuffer[pos_x + pos_y * width] = VGA_COLOR;
+    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
+    //unsigned char* location = (unsigned char*)0xA0000 + WIDTH * pos_y + pos_x;
+    //*location = VGA_COLOR;
 }
 
 unsigned char getPixel(int pos_x, int pos_y)
@@ -36,10 +40,12 @@ void drawRect(int startx, int starty, int width, int height, unsigned char VGA_C
     {
         for (int j = starty; j < endy; j++)
         {
-            putPixel(i,j,VGA_COLOR);
+            g_BackBuffer[i + j * width] = VGA_COLOR;
         }        
     }
+    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
+
 
 void drawLine(int startx, int starty, int width, unsigned char VGA_COLOR)
 {
@@ -47,8 +53,9 @@ void drawLine(int startx, int starty, int width, unsigned char VGA_COLOR)
 
     for (int i = startx; i < endx; i++)
     {
-        putPixel(i,starty,VGA_COLOR);
+        g_BackBuffer[i + starty * width] = VGA_COLOR;
     }
+    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
 void PaintDesktop(int VGA_COLOR)
@@ -56,7 +63,7 @@ void PaintDesktop(int VGA_COLOR)
     //fill the background of the desktop
     drawRect(0, 0 , WIDTH, HEIGHT, VGA_COLOR);
     drawRect(0, 180, 320, 20, 0x07);
-   // drawImage(start, 2, 182);
+    //drawImage(start, 2, 182);
 }
 
 void drawWindow(int x, int y, int width, int height, char* name, unsigned char VGA_COLOR)

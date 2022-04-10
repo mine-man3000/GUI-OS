@@ -1,0 +1,8 @@
+kernel.bin
+os-image.bin
+boot/*.o
+cpu/*.o
+drivers/*.o
+gui/*.o
+kernel/*.o
+libc/*.o

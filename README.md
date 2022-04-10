@@ -1,4 +1,4 @@
-todo: 
+What I want to do: 
 - [X] Booting 
 - [X] Basic GUI 
 - [X] Mouse Detection 
@@ -9,7 +9,10 @@ todo:
 - [ ] Read From FAT32
 - [ ] Terminal
 - [ ] Port *Something*
+- [ ] fix GUI flickers
+- [ ] fix Window rendering
 
+What I need to do:
 - [X] Load an IDT so that exceptions and interrupts can be handled.
 - [X] Write a physical memory allocator, a good starting point is a bitmap allocator.
 - [ ] Write a virtual memory manager that can map, remap and unmap pages.
