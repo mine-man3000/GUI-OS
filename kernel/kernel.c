@@ -7,13 +7,12 @@
 #include "../drivers/mouse.h"
 
 void kernel_main() {
-//    isr_install();
-//    irq_install();
+    isr_install();
+    irq_install();
 
     //background
     PaintDesktop(0x09);
 
-    //
     //drawWindow(10, 10, 10, 10, "HELLO WORLD", 0x0F);
 
     //drawWindow(15, 15, 200, 9, "HELLO WORLD", 0x0F);

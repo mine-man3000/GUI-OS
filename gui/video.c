@@ -96,6 +96,7 @@ void drawLetter(char *letter, int startx, int starty)
             x++;
         }
     }
+    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
 void drawImage(char *icon, int posx, int posy)
@@ -115,6 +116,7 @@ void drawImage(char *icon, int posx, int posy)
             x++;
         }
     }
+    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
 

@@ -12,3 +12,9 @@
 #define PS2YOverflow 0b10000000
 
 void InitPS2Mouse();
+void HandlePS2Mouse(uint8_t data);
+
+static struct Point{
+    long X;
+    long Y;
+} Point;
