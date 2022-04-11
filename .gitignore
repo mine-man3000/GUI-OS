@@ -1,6 +1,7 @@
 kernel.bin
 os-image.bin
 boot/*.o
+boot/*.bin
 cpu/*.o
 drivers/*.o
 gui/*.o
