@@ -9,7 +9,7 @@ What I want to do:
 - [ ] Read From FAT32
 - [ ] Terminal
 - [ ] Port *Something*
-- [ ] fix GUI flickers
+- [X] fix GUI flickers
 - [ ] fix Window rendering
 - [ ] Fix Icon and Text rendering
 

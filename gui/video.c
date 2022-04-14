@@ -43,7 +43,8 @@ void drawRect(int startx, int starty, int width, int height, unsigned char VGA_C
             g_BackBuffer[i + j * width] = VGA_COLOR;
         }        
     }
-    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
+    return g_BackBuffer;
+    //memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
 
@@ -55,15 +56,17 @@ void drawLine(int startx, int starty, int width, unsigned char VGA_COLOR)
     {
         g_BackBuffer[i + starty * width] = VGA_COLOR;
     }
-    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
+    return g_BackBuffer;
+    //memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
 void PaintDesktop(int VGA_COLOR)
 {
     //fill the background of the desktop
-    drawRect(0, 0 , WIDTH, HEIGHT, VGA_COLOR);
-    drawRect(0, 180, 320, 20, 0x07);
-    //drawImage(start, 2, 182);
+    drawRect(0, 0 , WIDTH, HEIGHT - 20, VGA_COLOR);
+    drawRect(0, 180, WIDTH, 20, 0x07);
+    drawImage(start, 2, 182);
+    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
 void drawWindow(int x, int y, int width, int height, char* name, unsigned char VGA_COLOR)
@@ -72,7 +75,8 @@ void drawWindow(int x, int y, int width, int height, char* name, unsigned char V
     drawRect(x + 1, y, width - 2, height - 1, VGA_COLOR);
     drawRect(x, y-3, width, 9, 0x37);
     //drawString(name, x + 2, y - 1);
-    //drawImage(close, x + width - 7, y - 1);
+    drawImage(close, x + width - 7, y - 1);
+    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
 void drawLetter(char *letter, int startx, int starty)
@@ -96,7 +100,8 @@ void drawLetter(char *letter, int startx, int starty)
             x++;
         }
     }
-    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
+    return g_BackBuffer;
+    //memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
 void drawImage(char *icon, int posx, int posy)
@@ -116,7 +121,8 @@ void drawImage(char *icon, int posx, int posy)
             x++;
         }
     }
-    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
+    return g_BackBuffer;
+    //memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
 
