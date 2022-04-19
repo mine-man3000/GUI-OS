@@ -7,7 +7,7 @@
 bool MouseDrawn;
 
 int width       = 320;     //pixels horizontally                   (vesa = 1024 )  (vga = 320)
-int height      = 200;      //pixels vertically                     (vesa = 786  )  (vga = 200)
+int height      = 200;     //pixels vertically                     (vesa = 786  )  (vga = 200)
 int pitch       = 2560;    //width*pixelwidth                      (vesa = 16384)  (vga = 5120)
 int depth       = 8;       //how many bits of color                (vesa = 16)     (vga = 8)
 int pixelwidth  = 8;       //how many bytes to go one pixel over   (vesa = 16)     (vga = 8)
