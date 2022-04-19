@@ -31,7 +31,7 @@ unsigned char getPixel(int pos_x, int pos_y)
     return location;
 }
 
-void drawRect(int startx, int starty, int width, int height, unsigned char VGA_COLOR)
+uint8_t drawRect(int startx, int starty, int width, int height, unsigned char VGA_COLOR)
 {
     int endx = startx + width;
     int endy = starty + height;
@@ -48,7 +48,7 @@ void drawRect(int startx, int starty, int width, int height, unsigned char VGA_C
 }
 
 
-void drawLine(int startx, int starty, int width, unsigned char VGA_COLOR)
+uint8_t drawLine(int startx, int starty, int width, unsigned char VGA_COLOR)
 {
     int endx = startx + width;
 
@@ -79,7 +79,7 @@ void drawWindow(int x, int y, int width, int height, char* name, unsigned char V
     memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
-void drawLetter(char *letter, int startx, int starty)
+uint8_t drawLetter(char *letter, int startx, int starty)
 {
     int x = startx;
     int y = starty;
@@ -104,7 +104,7 @@ void drawLetter(char *letter, int startx, int starty)
     //memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
 }
 
-void drawImage(char *icon, int posx, int posy)
+uint8_t drawImage(char *icon, int posx, int posy)
 {
     int x = posx;
     int y = posy;

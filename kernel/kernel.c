@@ -6,7 +6,6 @@
 #include "../gui/video.h"
 #include "../drivers/mouse.h"
 
-
 void kernel_main() {
     isr_install();
     __asm__ ("sti");
@@ -22,7 +21,7 @@ void kernel_main() {
         uint8_t mouseDataOld = port_word_in(0x60);
      
         HandlePS2Mouse(mouseData);
-     
+
         //if(mouseData != mouseDataOld)
         //{
         //    HandlePS2Mouse(mouseData);
