@@ -129,7 +129,8 @@ uint8_t drawImage(char *icon, int posx, int posy)
 void drawCursor(long X, long Y)
 {
     PaintDesktop(0x09);
-    drawRect(X, Y, 3, 3, 0x00);
+    uint8_t buffer = drawRect(X, Y, 3, 3, 0x00);
+    memory_copy(buffer, (void*)0xA0000, sizeof(buffer));
 }
 
 void drawString(char* str, int startx, int starty)
