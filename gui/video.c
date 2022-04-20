@@ -6,24 +6,17 @@
 
 bool MouseDrawn;
 
-int width       = 320;     //pixels horizontally                   (vesa = 1024 )  (vga = 320)
-int height      = 200;     //pixels vertically                     (vesa = 786  )  (vga = 200)
-int pitch       = 2560;    //width*pixelwidth                      (vesa = 16384)  (vga = 5120)
-int depth       = 8;       //how many bits of color                (vesa = 16)     (vga = 8)
-int pixelwidth  = 8;       //how many bytes to go one pixel over   (vesa = 16)     (vga = 8)
+int width       = 320;
+int height      = 200;
+int pitch       = 2560;
+int depth       = 8;
+int pixelwidth  = 8;
 
 uint8_t g_BackBuffer[320*200];
 
 uint32_t MouseCursorBuffer[16 * 16];
 uint32_t MouseCursorBufferAfter[16 * 16];
 
-void putPixel(int pos_x, int pos_y, unsigned char VGA_COLOR)
-{
-    g_BackBuffer[pos_x + pos_y * width] = VGA_COLOR;
-    memory_copy(g_BackBuffer, (void*)0xA0000, sizeof(g_BackBuffer));
-    //unsigned char* location = (unsigned char*)0xA0000 + WIDTH * pos_y + pos_x;
-    //*location = VGA_COLOR;
-}
 
 unsigned char getPixel(int pos_x, int pos_y)
 {
