@@ -17,7 +17,6 @@ uint8_t g_BackBuffer[320*200];
 uint32_t MouseCursorBuffer[16 * 16];
 uint32_t MouseCursorBufferAfter[16 * 16];
 
-
 unsigned char getPixel(int pos_x, int pos_y)
 {
     unsigned char* location = (unsigned char*)0xA0000 + WIDTH * pos_y + pos_x;
